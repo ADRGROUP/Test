@@ -1,0 +1,187 @@
+<odoo>
+
+    <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//field[@name='category_ids']" position="after">
+                        <group>
+                            <group>
+                                <field name="employee_no" required="1"/>
+                            </group>
+                        </group>
+                    </xpath>
+                    <xpath expr="//field[@name='job_id']" position="replace">
+                        <field name="job_id" string="Designation"/>
+                    </xpath>
+                     <xpath expr="//field[@name='job_title']" position="replace">
+                        <field name="job_title" invisible="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='emergency_phone']" position="after">
+                        <field name="emergency_contact_relationship_id"/>
+                    </xpath>
+                     <xpath expr="//field[@name='birthday']" position="replace">
+                        <field name="birthday" required="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='birthday']" position="after">
+                        <field name="age"/>
+                    </xpath>
+                    <xpath expr="//page[@name='public']/group" position="after">
+
+                        <group string="Official Information">
+                            <group>
+                                <field name="category"/>
+                                <field name="reporting_1"/>
+                                <field name="reporting_2"/>
+                                <field name="date_of_joining" required="1"/>
+                                <field name="experience"/>
+                                <field name="date_of_confirmation"/>
+                                <field name="date_of_next_revision"/>
+                                <field name="promotion"/>
+                                <field name="resigned_on"/>
+                                <field name="reason_resigned"/>
+                            </group>
+                            <group>
+                                <field name="date_of_relieving"/>
+                                <field name="f_f_amount"/>
+                                <field name="f_f_settlement"/>
+                                <field name="pan_no"/>
+                                <field name="aadhar_no"/>
+                                <field name="pf_no"/>
+                                <field name="esi_no"/>
+                                <field name="uan_no"/>
+                                <field name="gratuity_policy_no"/>
+                            </group>
+                        </group>
+
+                    </xpath>
+                     <xpath expr="//page[@name='personal_information']/group[1]" position="after">
+                         <group string="Personal Details">
+                             <group>
+                                 <field name="religion_id"/>
+                                 <field name="blood_group_id"/>
+                                 <field name="mother_language"/>
+                             </group>
+                         </group>
+                          <group>
+                             <group string="Current Address">
+                                <field name="street" required="1"/>
+                                 <field name="street2"/>
+                                 <field name="city" required="1"/>
+                                 <field name="state_id" required="1"/>
+                                 <field name="address_country_id" readonly="1"/>
+                                 <field name="zip" required="1"/>
+                                 <field name="home_phone"/>
+                                 <field name="home_mobile_phone" required="1"/>
+                                 <field name="home_email"/>
+                             </group>
+                              <group string="Permanent Address">
+                                  <field name="permanent_address_street" required="1"/>
+                                  <field name="permanent_address_street2"/>
+                                  <field name="permanent_address_city" required="1"/>
+                                  <field name="permanent_address_state_id" required="1"/>
+                                  <field name="permanent_address_country_id" readonly="1"/>
+                                  <field name="permanent_address_zip" required="1"/>
+                             </group>
+                         </group>
+                         <notebook >
+                         <page string="Family Details">
+                             <field name ="relation_ids">
+                                 <tree editable="bottom">
+                                     <field name="name" required="1"/>
+                                     <field name="relationship_id" required="1"/>
+                                     <field name="date_of_birth" required="1"/>
+                                     <field name="age"/>
+                                     <field name="occupation_id" required="1"/>
+                                 </tree>
+                             </field>
+
+                         </page>
+                         <page string="Educational Details">
+                             <field name ="education_details_ids">
+                                 <tree editable="bottom">
+                                     <field name="degree" required="1"/>
+                                     <field name="stream" required="1"/>
+                                     <field name="board_or_university" required="1"/>
+                                     <field name="name_of_institution" required="1"/>
+                                     <field name="year_of_passing" required="1"/>
+                                     <field name="percentage" required="1"/>
+                                     <field name="pass_class" required="1"/>
+                                     <field name="certificate_copy"/>
+                                 </tree>
+                             </field>
+
+                         </page>
+                             <page string="Work Experience">
+                             <field name ="work_experience_ids">
+                                 <tree editable="bottom">
+                                     <field name="job_id" required="1"/>
+                                     <field name="employer" required="1"/>
+                                     <field name="period_from" required="1"/>
+                                     <field name="period_to" required="1"/>
+                                     <field name="experience"/>
+                                 </tree>
+                             </field>
+
+                         </page>
+                         <page string="Languages known details">
+                             <field name ="language_ids">
+                                 <tree editable="bottom">
+                                     <field name="language_id" required="1"/>
+                                     <field name="speak"/>
+                                     <field name="read"/>
+                                     <field name="write"/>
+                                 </tree>
+                             </field>
+                         </page>
+                      </notebook>
+                     </xpath>
+                </data>
+            </field>
+    </record>
+
+    <menuitem
+            id="menu_master_main"
+            name="Master"
+            parent="hr.menu_hr_root"
+            sequence="91"/>
+
+    <!-- Religion-->
+      <record id="view_religion_form" model="ir.ui.view">
+            <field name="name">hr.religion.form</field>
+            <field name="model">hr.religion</field>
+            <field name="arch" type="xml">
+                <form string="Religion">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+      </record>
+
+     <record id="view_religion_tree" model="ir.ui.view">
+            <field name="name">hr.religion.tree</field>
+            <field name="model">hr.religion</field>
+            <field name="arch" type="xml">
+                <tree string="Religion">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="view_religion_action" model="ir.actions.act_window">
+            <field name="name">Religion</field>
+            <field name="res_model">hr.religion</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <menuitem id="menu_religion" name="Religion" action="view_religion_action" parent="menu_master_main" sequence="0"/>
+
+</odoo>
